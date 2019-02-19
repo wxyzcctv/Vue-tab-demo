@@ -2,22 +2,23 @@
 let view = new Vue({
     el:'#app',
     data:{
-        selected:0
+        selected:0,
+        tabs:[
+            {name:'a',content:'aaa'},
+            {name:'b',content:'bbb'},
+            {name:'c',content:'ccc'},
+        ]
     },
     template:`
     <div>
         <ol>
-            <li v-bind:class="{active:selected === 0}"
-              v-on:click="selected = 0">1</li>
-            <li v-bind:class="{active:selected === 1}"
-              v-on:click="selected = 1">2</li>
-            <li v-bind:class="{active:selected === 2}"
-              v-on:click="selected = 2">3</li>
+            <li v-for="tab in tabs"
+              v-on:click="selected = tab.name"
+              v-bind:class="{active: tab.name === selected}">{{tab.name}}</li>
         </ol>
         <ol>
-            <li v-show="selected === 0">1</li>
-            <li v-show="selected === 1">2</li>
-            <li v-show="selected === 2">3</li>
+            <li v-for="tab in tabs"
+            v-show="selected === tab.name">{{tab.content}}</li>
         </ol>
 
     </div>
